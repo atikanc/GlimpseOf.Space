@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<body>
+
+		<script>
+			var req = new XMLHttpRequest();
+			var url = "https://api.nasa.gov/planetary/apod?api_key=";
+			var api_key = "DEMO_KEY";
+
+			req.open("GET", url + api_key);
+			req.send();
+
+			req.addEventListener("load", function(){
+				if(req.status == 200 && req.readyState == 4){
+				var response = JSON.parse(req.responseText);
+				document.getElementById("title").textContent = response.title;
+				document.getElementById("date").textContent = response.date;
+				document.getElementById("pic").src = response.hdurl;
+				document.getElementById("explanation").textContent = response.explanation;
+			  }
+			})
+		</script> 
+
+		<center>
+			<h1 style = "font-family: Arial">NASA Astronomy Picture Of The Day</h1>
+			<h2 style = "font-family: Arial" id="title"></h2>
+			<h3 style = "font-family: Arial">Date: <span id="date"></span></h3>
+			<img id="pic" src="" alt="NASA Picture Of The Day" width="50%">
+			<p style = "font-family: Arial" id="explanation"></p>
+		</center>
+	</body>
+</html>
